@@ -14,5 +14,5 @@ jobs:
       - name: check syntax with darklua minifier
         run: |
           find . -type f \( -name "*.lua" -o -name "*.luau" \) -print0 | while IFS= read -r -d '' file; do
-            ./darklua process "$file" temp_check.lua || exit 1
+            ./darklua process "$file" syntaxcheck.lua || exit 1
           done
