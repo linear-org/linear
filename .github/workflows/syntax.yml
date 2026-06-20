@@ -1,0 +1,16 @@
+name: syntax checker
+on: [push, pull_request]
+jobs:
+  syntax-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: download luau
+        run: |
+          curl -sL https://github.com/luau-lang/luau/releases/latest/download/luau-ubuntu.zip -o luau.zip
+          unzip luau.zip
+          chmod +x luau-analyze
+      - name: analyze
+        run: |
+          find . -type f \( -name "*.lua" -o -name "*.luau" \) -print0 | xargs -0 ./luau-analyze
