@@ -6,11 +6,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: download luau
+      - name: download darklua
         run: |
-          curl -sL https://github.com/luau-lang/luau/releases/latest/download/luau-ubuntu.zip -o luau.zip
-          unzip luau.zip
-          chmod +x luau-analyze
-      - name: analyze
+          curl -sL https://github.com/seaofvoices/darklua/releases/latest/download/darklua-linux-x86_64.zip -o darklua.zip
+          unzip darklua.zip
+          chmod +x darklua
+      - name: check syntax with darklua minifier
         run: |
-          find . -type f \( -name "*.lua" -o -name "*.luau" \) -print0 | xargs -0 ./luau-analyze
+          find . -type f \( -name "*.lua" -o -name "*.luau" \) -print0 | while IFS= read -r -d '' file; do
+            ./darklua process "$file" temp_check.lua || exit 1
+          done
