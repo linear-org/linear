@@ -1,5 +1,7 @@
-local language = getgenv().linearlanguage or "English"
 local url = "https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/src/translations/"
+
+local Linear = getgenv().Linear
+local language = Linear.Language
 
 local english = {}
 local fbsuccess, fboutput = pcall(function()
