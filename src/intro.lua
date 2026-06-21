@@ -2,6 +2,8 @@ local intro = {}
 local fertilizer = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
 local tweenservice = game:GetService("TweenService")
 
+local Linear = getgenv().Linear
+
 function intro:Start()
 	local audio = Instance.new("Sound")
 	audio.Name = "audio"
@@ -105,7 +107,7 @@ function intro:Start()
 		task.wait()
 	end
 
-	repeat task.wait() until getgenv().linearloaded == true
+	repeat task.wait() until Linear.Loaded == true
 
 	endvideo.TimePosition = 0
 	
