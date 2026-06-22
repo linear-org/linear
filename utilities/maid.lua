@@ -1,45 +1,55 @@
-local maid = {}
-maid.__index = maid
+local Maid = {}
 
-function maid.new()
-	return setmetatable({tasks = {}}, maid)
+function Maid.new()
+	return setmetatable({ _jobs = {} }, Maid)
 end
 
-function maid:GiveTask(task)
-	if not task then return end
-	table.insert(self.tasks, task)
-	return task
+function Maid:__index(key)
+	return Maid[key] or self._jobs[key]
 end
 
-function maid:Remove(task)
-	if not task then return end
-	local found = table.find(self.tasks, task)
-	if not found then return end
-	if typeof(task) == "RBXScriptConnection" then
-		task:Disconnect()
-	elseif typeof(task) == "Instance" then
-		task:Destroy()
-	elseif typeof(task) == "thread" then
-		task.cancel(task)
-	elseif typeof(task) == "function" then
-		task.spawn(task)
-	elseif typeof(task) == "table" then
-		if typeof(task.Destroy) == "function" then
-			task:Destroy()
-		elseif typeof(task.Disconnect) == "function" then
-			task:Disconnect()
-		elseif typeof(task.Clean) == "function" then
-			task:Clean()
+local function cleanJob(job)
+	if typeof(job) == "RBXScriptConnection" then
+		job:Disconnect()
+	elseif typeof(job) == "Instance" then
+		job:Destroy()
+	elseif typeof(job) == "thread" then
+		task.cancel(job)
+	elseif typeof(job) == "function" then
+		job()
+	elseif typeof(job) == "table" then
+		if typeof(job.Destroy) == "function" then      job:Destroy()
+		elseif typeof(job.Disconnect) == "function" then job:Disconnect()
+		elseif typeof(job.Clean) == "function" then      job:Clean() 
 		end
 	end
-	table.remove(self.tasks, found)
 end
 
-function maid:Clean()
-	for fart = #self.tasks, 1, -1 do
-		self:Remove(self.tasks[fart])
+function Maid:__newindex(key, job)
+	if Maid[key] then
+		error(string.format("Cannot overwrite Maid method '%s'", tostring(key)), 2)
 	end
-	table.clear(self.tasks)
+
+	local oldJob = self._jobs[key]
+	if oldJob then
+		cleanJob(oldJob)
+	end
+
+	self._jobs[key] = job
 end
 
-return maid
+function Maid:GiveTask(job)
+	if not job then return end
+	local anonymousId = #self._jobs + 1
+	self[anonymousId] = job
+	return job
+end
+
+function Maid:Clean()
+	for key, job in pairs(self._jobs) do
+		cleanJob(job)
+		self._jobs[key] = nil
+	end
+end
+
+return Maid
