@@ -11,5 +11,10 @@ return {
     FunTabTitle = "Fun",
     FunTabDescription = "Stuff for messing around and having fun.",
     SettingsTabTitle = "Settings",
-    SettingsTabDescription = "Options to change how the UI works."
+    SettingsTabDescription = "Options to change how the UI works.",
+    
+    -- player --
+    MovementGroupboxTitle = "Movement",
+    InfiniteStaminaTitle = "Infinite Stamina",
+    InfiniteStaminaDescription = "Makes so you never run out of stamina.",
 }
