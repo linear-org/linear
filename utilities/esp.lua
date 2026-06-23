@@ -181,12 +181,12 @@ local function create(obj, cfg)
         end
     end
     
+    hi.Parent = folder
+    bb.Parent = folder
+    
     insts[obj] = data
     apply(data)
     render(obj, cfg, data)
-    
-    hi.Parent = folder
-    bb.Parent = folder
     
     updatehb()
     
