@@ -94,13 +94,13 @@ end
 
 local function create(obj, cfg)
     if not obj or insts[obj] then return end
-    local hd = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart", true) or obj
+    local hd = (obj:IsA("Model") and obj.PrimaryPart) or obj:FindFirstChildWhichIsA("BasePart", true) or obj
     local col = cfg.Color or Color3.fromRGB(255, 80, 80)
     local md = maid.new()
     local data = {cfg = cfg, lbls = {}, md = md}
     
     local hi = Instance.new("Highlight")
-    hi.Name = "[HEXAGON] Highlight"
+    hi.Name = "[linear] highlight"
     hi.Adornee = obj
     hi.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     hi.FillColor = col
@@ -110,7 +110,7 @@ local function create(obj, cfg)
     md:GiveTask(hi)
     
     local bb = Instance.new("BillboardGui")
-    bb.Name = "[HEXAGON] Billboard"
+    bb.Name = "[linear] billboard"
     bb.Adornee = hd
     bb.Size = UDim2.new(0, 240, 0, 65)
     bb.StudsOffset = Vector3.new(0, 3, 0)
