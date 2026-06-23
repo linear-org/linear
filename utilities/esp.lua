@@ -63,7 +63,13 @@ local function render(obj, cfg, data)
                     local res = scfg.UpdateWith(obj)
                     if res ~= nil then val = res end
                 end
-                lbl.Text = string.format("%s: %s", scfg.Name or k, tostring(val))
+                
+                if val == nil or val == "" then
+                    lbl.Visible = false
+                else
+                    lbl.Visible = true
+                    lbl.Text = string.format("%s: %s", scfg.Name or k, tostring(val))
+                end
             end
         end
     end
@@ -94,13 +100,18 @@ end
 
 local function create(obj, cfg)
     if not obj or insts[obj] then return end
-    local hd = (obj:IsA("Model") and obj.PrimaryPart) or obj:FindFirstChildWhichIsA("BasePart", true) or obj
+    
+    local hd = obj
+    if obj:IsA("Model") then
+        hd = obj.PrimaryPart or obj:FindFirstChild("HumanoidRootPart") or obj:FindFirstChild("Head") or obj:FindFirstChildWhichIsA("BasePart", true) or obj
+    end
+    
     local col = cfg.Color or Color3.fromRGB(255, 80, 80)
     local md = maid.new()
     local data = {cfg = cfg, lbls = {}, md = md}
     
     local hi = Instance.new("Highlight")
-    hi.Name = "[linear] highlight"
+    hi.Name = "[HEXAGON] Highlight"
     hi.Adornee = obj
     hi.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     hi.FillColor = col
@@ -110,7 +121,7 @@ local function create(obj, cfg)
     md:GiveTask(hi)
     
     local bb = Instance.new("BillboardGui")
-    bb.Name = "[linear] billboard"
+    bb.Name = "[HEXAGON] Billboard"
     bb.Adornee = hd
     bb.Size = UDim2.new(0, 240, 0, 65)
     bb.StudsOffset = Vector3.new(0, 3, 0)
@@ -144,11 +155,17 @@ local function create(obj, cfg)
     local gd = Instance.new("UIGridLayout")
     gd.CellSize = UDim2.new(0.5, -4, 0, 14)
     gd.SortOrder = Enum.SortOrder.LayoutOrder
+    gd.FillDirection = Enum.FillDirection.Horizontal
     gd.Parent = gf
     
     if cfg.Stats then
-        local idx = 1
-        for k, fart in pairs(cfg.Stats) do
+        local sk = {}
+        for k in pairs(cfg.Stats) do
+            table.insert(sk, k)
+        end
+        table.sort(sk)
+        
+        for i, k in ipairs(sk) do
             local lbl = Instance.new("TextLabel")
             lbl.Size = UDim2.new(1, 0, 1, 0)
             lbl.BackgroundTransparency = 1
@@ -156,10 +173,9 @@ local function create(obj, cfg)
             lbl.TextColor3 = col
             lbl.TextStrokeTransparency = 0
             lbl.TextXAlignment = Enum.TextXAlignment.Left
-            lbl.LayoutOrder = idx
+            lbl.LayoutOrder = i
             lbl.Parent = gf
             data.lbls[k] = lbl
-            idx = idx + 1
         end
     end
     
