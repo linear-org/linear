@@ -111,7 +111,7 @@ local function create(obj, cfg)
     local data = {cfg = cfg, lbls = {}, md = md}
     
     local hi = Instance.new("Highlight")
-    hi.Name = "[HEXAGON] Highlight"
+    hi.Name = "[linear] hl"
     hi.Adornee = obj
     hi.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     hi.FillColor = col
@@ -121,9 +121,9 @@ local function create(obj, cfg)
     md:GiveTask(hi)
     
     local bb = Instance.new("BillboardGui")
-    bb.Name = "[HEXAGON] Billboard"
+    bb.Name = "[linear] bb"
     bb.Adornee = hd
-    bb.Size = UDim2.new(0, 240, 0, 65)
+    bb.Size = UDim2.new(12, 0, 3.5, 0)
     bb.StudsOffset = Vector3.new(0, 3, 0)
     bb.AlwaysOnTop = true
     bb.Parent = obj
@@ -133,27 +133,28 @@ local function create(obj, cfg)
     local vl = Instance.new("UIListLayout")
     vl.SortOrder = Enum.SortOrder.LayoutOrder
     vl.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    vl.Padding = UDim.new(0, 2)
+    vl.Padding = UDim.new(0.05, 0)
     vl.Parent = bb
     
     local tl = Instance.new("TextLabel")
-    tl.Size = UDim2.new(1, 0, 0, 18)
+    tl.Size = UDim2.new(1, 0, 0.3, 0)
     tl.BackgroundTransparency = 1
-    tl.Font = Enum.Font.ArialBold
+    tl.Font = Enum.Font.FredokaOne
     tl.TextColor3 = col
     tl.TextStrokeTransparency = 0
+    tl.TextScaled = true
     tl.LayoutOrder = 1
     tl.Parent = bb
     data.tl = tl
     
     local gf = Instance.new("Frame")
-    gf.Size = UDim2.new(1, 0, 1, -20)
+    gf.Size = UDim2.new(1, 0, 0.65, 0)
     gf.BackgroundTransparency = 1
     gf.LayoutOrder = 2
     gf.Parent = bb
     
     local gd = Instance.new("UIGridLayout")
-    gd.CellSize = UDim2.new(0.5, -4, 0, 14)
+    gd.CellSize = UDim2.new(0.48, 0, 0.48, 0)
     gd.SortOrder = Enum.SortOrder.LayoutOrder
     gd.FillDirection = Enum.FillDirection.Horizontal
     gd.Parent = gf
@@ -169,10 +170,11 @@ local function create(obj, cfg)
             local lbl = Instance.new("TextLabel")
             lbl.Size = UDim2.new(1, 0, 1, 0)
             lbl.BackgroundTransparency = 1
-            lbl.Font = Enum.Font.ArialBold
+            lbl.Font = Enum.Font.FredokaOne
             lbl.TextColor3 = col
             lbl.TextStrokeTransparency = 0
             lbl.TextXAlignment = Enum.TextXAlignment.Left
+            lbl.TextScaled = true
             lbl.LayoutOrder = i
             lbl.Parent = gf
             data.lbls[k] = lbl
