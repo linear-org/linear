@@ -1,3 +1,4 @@
+
 local maid = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/main/utilities/maid.lua"))()
 local run = game:GetService("RunService")
 
@@ -9,8 +10,8 @@ local sets = {
     enabled = true,
     highlight = true,
     billboard = true,
-    fill = 0.65,
-    outline = 0.7,
+    fill = 0.5,
+    outline = 0.1,
     size = 11
 }
 
@@ -181,18 +182,12 @@ local function create(obj, cfg)
         end
     end
     
+    insts[obj] = data
+    apply(data)
+    render(obj, cfg, data)
+    
     hi.Parent = folder
     bb.Parent = folder
-    
-    insts[obj] = data
-    
-    task.defer(function()
-        if insts[obj] == data then
-            apply(data)
-        end
-    end)
-    
-    render(obj, cfg, data)
     
     updatehb()
     
