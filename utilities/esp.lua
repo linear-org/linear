@@ -28,11 +28,7 @@ local function apply(data)
     end
     if bb then
         bb.Enabled = sets.enabled and sets.billboard
-        for fart, v in ipairs(bb:GetDescendants()) do
-            if v:IsA("TextLabel") then
-                v.TextSize = sets.size
-            end
-        end
+        bb.Size = UDim2.new(sets.size * 0.7, 0, sets.size * 0.22, 0)
     end
 end
 
@@ -123,7 +119,6 @@ local function create(obj, cfg)
     local bb = Instance.new("BillboardGui")
     bb.Name = "[linear] bb"
     bb.Adornee = hd
-    bb.Size = UDim2.new(0, 180, 0, 60)
     bb.StudsOffset = Vector3.new(0, 3, 0)
     bb.AlwaysOnTop = true
     bb.Parent = obj
@@ -133,27 +128,28 @@ local function create(obj, cfg)
     local vl = Instance.new("UIListLayout")
     vl.SortOrder = Enum.SortOrder.LayoutOrder
     vl.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    vl.Padding = UDim.new(0, 2)
+    vl.Padding = UDim.new(0.02, 0)
     vl.Parent = bb
     
     local tl = Instance.new("TextLabel")
-    tl.Size = UDim2.new(1, 0, 0, 16)
+    tl.Size = UDim2.new(1, 0, 0.28, 0)
     tl.BackgroundTransparency = 1
     tl.Font = Enum.Font.BuilderSansBold
     tl.TextColor3 = col
     tl.TextStrokeTransparency = 0
+    tl.TextScaled = true
     tl.LayoutOrder = 1
     tl.Parent = bb
     data.tl = tl
     
     local gf = Instance.new("Frame")
-    gf.Size = UDim2.new(1, 0, 1, -18)
+    gf.Size = UDim2.new(1, 0, 0.68, 0)
     gf.BackgroundTransparency = 1
     gf.LayoutOrder = 2
     gf.Parent = bb
     
     local gd = Instance.new("UIGridLayout")
-    gd.CellSize = UDim2.new(0.5, -4, 0, 13)
+    gd.CellSize = UDim2.new(0.49, 0, 0.45, 0)
     gd.SortOrder = Enum.SortOrder.LayoutOrder
     gd.FillDirection = Enum.FillDirection.Horizontal
     gd.Parent = gf
@@ -173,6 +169,7 @@ local function create(obj, cfg)
             lbl.TextColor3 = col
             lbl.TextStrokeTransparency = 0
             lbl.TextXAlignment = Enum.TextXAlignment.Left
+            lbl.TextScaled = true
             lbl.LayoutOrder = i
             lbl.Parent = gf
             data.lbls[k] = lbl
