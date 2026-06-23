@@ -24,7 +24,11 @@ local function apply(data)
     end
     if bb then
         bb.Enabled = sets.enabled and sets.billboard
-        bb.Size = UDim2.new(sets.size * 0.7, 0, sets.size * 0.25, 0)
+        for fart, v in ipairs(bb:GetDescendants()) do
+            if v:IsA("TextLabel") then
+                v.TextSize = sets.size
+            end
+        end
     end
 end
 
@@ -36,26 +40,6 @@ end
 
 local function render(obj, cfg, data)
     if not data or not data.bb then return end
-    
-    local cam = workspace.CurrentCamera
-    local hd = data.bb.Adornee
-    if cam and hd then
-        local pos = hd:IsA("BasePart") and hd.Position or (hd:IsA("Model") and hd:GetPivot().Position)
-        if pos then
-            local dist = (cam.CFrame.Position - pos).Magnitude
-            local calculatedThickness = math.clamp(35 / dist, 0.3, 1.2)
-            
-            if data.ts then 
-                data.ts.Thickness = calculatedThickness 
-            end
-            if data.ls then
-                for _, stroke in pairs(data.ls) do
-                    stroke.Thickness = calculatedThickness
-                end
-            end
-        end
-    end
-
     local name = cfg.Name or obj.Name
     if cfg.NamingMethods and typeof(cfg.NamingMethods) == "function" then
         local res = cfg.NamingMethods(obj)
@@ -120,7 +104,7 @@ local function create(obj, cfg)
     
     local col = cfg.Color or Color3.fromRGB(255, 80, 80)
     local md = maid.new()
-    local data = {cfg = cfg, lbls = {}, ls = {}, md = md}
+    local data = {cfg = cfg, lbls = {}, md = md}
     
     local hi = Instance.new("Highlight")
     hi.Name = "[linear] hl"
@@ -135,6 +119,7 @@ local function create(obj, cfg)
     local bb = Instance.new("BillboardGui")
     bb.Name = "[linear] bb"
     bb.Adornee = hd
+    bb.Size = UDim2.new(0, 180, 0, 60)
     bb.StudsOffset = Vector3.new(0, 3, 0)
     bb.AlwaysOnTop = true
     bb.Parent = obj
@@ -144,45 +129,30 @@ local function create(obj, cfg)
     local vl = Instance.new("UIListLayout")
     vl.SortOrder = Enum.SortOrder.LayoutOrder
     vl.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    vl.VerticalAlignment = Enum.VerticalAlignment.Center
-    vl.Padding = UDim.new(0.04, 0)
+    vl.Padding = UDim.new(0, 2)
     vl.Parent = bb
     
     local tl = Instance.new("TextLabel")
-    tl.Size = UDim2.new(0.9, 0, 0.3, 0)
+    tl.Size = UDim2.new(1, 0, 0, 16)
     tl.BackgroundTransparency = 1
     tl.Font = Enum.Font.BuilderSansBold
     tl.TextColor3 = col
-    tl.TextStrokeTransparency = 1
-    tl.TextScaled = true
+    tl.TextStrokeTransparency = 0
     tl.LayoutOrder = 1
     tl.Parent = bb
     data.tl = tl
     
-    local ts = Instance.new("UIStroke")
-    ts.Thickness = 1.2
-    ts.Color = Color3.fromRGB(0, 0, 0)
-    ts.Transparency = 0
-    ts.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-    ts.Parent = tl
-    data.ts = ts
-    
     local gf = Instance.new("Frame")
-    gf.Size = UDim2.new(0.95, 0, 0.6, 0)
+    gf.Size = UDim2.new(1, 0, 1, -18)
     gf.BackgroundTransparency = 1
     gf.LayoutOrder = 2
     gf.Parent = bb
     
-    local fl = Instance.new("UIListLayout")
-    fl.SortOrder = Enum.SortOrder.LayoutOrder
-    fl.FillDirection = Enum.FillDirection.Horizontal
-    fl.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    fl.VerticalAlignment = Enum.VerticalAlignment.Center
-    fl.ItemLineAlignment = Enum.ItemLineAlignment.Center
-    fl.Wraps = true
-    fl.HorizontalFlex = Enum.UIFlexAlignment.SpaceAround
-    fl.Padding = UDim.new(0.02, 0)
-    fl.Parent = gf
+    local gd = Instance.new("UIGridLayout")
+    gd.CellSize = UDim2.new(0.5, -4, 0, 13)
+    gd.SortOrder = Enum.SortOrder.LayoutOrder
+    gd.FillDirection = Enum.FillDirection.Horizontal
+    gd.Parent = gf
     
     if cfg.Stats then
         local sk = {}
@@ -193,25 +163,15 @@ local function create(obj, cfg)
         
         for i, k in ipairs(sk) do
             local lbl = Instance.new("TextLabel")
-            lbl.Size = UDim2.new(0.46, 0, 0.44, 0)
+            lbl.Size = UDim2.new(1, 0, 1, 0)
             lbl.BackgroundTransparency = 1
             lbl.Font = Enum.Font.BuilderSansMedium
             lbl.TextColor3 = col
-            lbl.TextStrokeTransparency = 1
-            lbl.TextXAlignment = Enum.TextXAlignment.Center
-            lbl.TextScaled = true
+            lbl.TextStrokeTransparency = 0
+            lbl.TextXAlignment = Enum.TextXAlignment.Left
             lbl.LayoutOrder = i
             lbl.Parent = gf
-            
-            local ls = Instance.new("UIStroke")
-            ls.Thickness = 1.1
-            ls.Color = Color3.fromRGB(0, 0, 0)
-            ls.Transparency = 0
-            ls.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-            ls.Parent = lbl
-            
             data.lbls[k] = lbl
-            data.ls[k] = ls
         end
     end
     
