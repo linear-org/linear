@@ -1,4 +1,3 @@
-
 local maid = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/main/utilities/maid.lua"))()
 local run = game:GetService("RunService")
 
