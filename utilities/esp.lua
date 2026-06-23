@@ -15,10 +15,10 @@ local sets = {
 }
 
 local wheretobelong = gethui and gethui() or game:GetService("CoreGui")
-local folder = wheretobelong:FindFirstChild("linearesp")
+local folder = wheretobelong:FindFirstChild(":(")
 if not folder then
     folder = Instance.new("Folder")
-    folder.Name = "linearesp"
+    folder.Name = ":("
     folder.Parent = wheretobelong
 end
 
@@ -234,5 +234,27 @@ function esp:UpdateStat(cfg, name, val)
     if not cfg or not cfg.Stats or not cfg.Stats[name] then return end
     cfg.Stats[name].Value = val
     if not cfg.Children then
-        local
-        
+        local d = insts[cfg.Object]
+        if d then render(cfg.Object, cfg, d) end
+    else
+        for fart, c in ipairs(cfg.Object:GetChildren()) do
+            local d = insts[c]
+            if d then render(c, cfg, d) end
+        end
+    end
+end
+
+function esp:Toggle(state) sets.enabled = state refresh() updatehb() end
+function esp:SetBillboard(state) sets.billboard = state refresh() end
+function esp:SetHighlight(state) sets.highlight = state refresh() end
+function esp:SetFillTransparency(val) sets.fill = val refresh() end
+function esp:SetOutlineTransparency(val) sets.outline = val refresh() end
+function esp:SetTextSize(val) sets.size = val refresh() end
+
+function esp:ClearAll()
+    for cfg, fart in pairs(bnds) do
+        self:UnbindESP(cfg)
+    end
+end
+
+return esp
