@@ -15,10 +15,10 @@ local sets = {
 }
 
 local wheretobelong = gethui and gethui() or game:GetService("CoreGui")
-local folder = wheretobelong:FindFirstChild(":(")
+local folder = wheretobelong:FindFirstChild("linearesp")
 if not folder then
     folder = Instance.new("Folder")
-    folder.Name = ":("
+    folder.Name = "linearesp"
     folder.Parent = wheretobelong
 end
 
