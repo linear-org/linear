@@ -120,7 +120,7 @@ local function create(obj, cfg)
     bb.Name = "[linear] bb"
     bb.Adornee = hd
     bb.Size = UDim2.new(0, 180, 0, 60)
-    bb.StudsOffset = Vector3.new(0, 3, 0)
+    bb.StudsOffset = Vector3.new(0, 0, 0)
     bb.AlwaysOnTop = true
     bb.Parent = obj
     data.bb = bb
