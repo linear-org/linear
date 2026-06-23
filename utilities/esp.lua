@@ -185,7 +185,13 @@ local function create(obj, cfg)
     bb.Parent = folder
     
     insts[obj] = data
-    apply(data)
+    
+    task.defer(function()
+        if insts[obj] == data then
+            apply(data)
+        end
+    end)
+    
     render(obj, cfg, data)
     
     updatehb()
