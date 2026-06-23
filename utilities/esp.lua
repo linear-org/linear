@@ -1,7 +1,3 @@
--- bro coded this with a potato 🥔 🥔 🤑🤝
--- needs immediate rework now
--- 4:50 am idk what im doing
-
 local maid = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/main/utilities/maid.lua"))()
 local run = game:GetService("RunService")
 
@@ -28,7 +24,7 @@ local function apply(data)
     end
     if bb then
         bb.Enabled = sets.enabled and sets.billboard
-        bb.Size = UDim2.new(sets.size * 0.8, 0, sets.size * 0.25, 0)
+        bb.Size = UDim2.new(sets.size * 0.55, 0, sets.size * 0.2, 0)
     end
 end
 
@@ -125,45 +121,56 @@ local function create(obj, cfg)
     data.bb = bb
     md:GiveTask(bb)
     
-    local wrapper = Instance.new("Frame")
-    wrapper.Name = "freezvee"
-    wrapper.Size = UDim2.new(1, 0, 1, 0)
-    wrapper.BackgroundTransparency = 1
-    wrapper.Parent = bb
-    
-    local szc = Instance.new("UISizeConstraint")
-    szc.MinSize = Vector2.new(150, 50)
-    szc.MaxSize = Vector2.new(300, 100)
-    szc.Parent = wrapper
-    
     local vl = Instance.new("UIListLayout")
     vl.SortOrder = Enum.SortOrder.LayoutOrder
     vl.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    vl.Padding = UDim.new(0.02, 0)
-    vl.Parent = wrapper
+    vl.Padding = UDim.new(0.04, 0)
+    vl.Parent = bb
     
     local tl = Instance.new("TextLabel")
-    tl.Size = UDim2.new(1, 0, 0.3, 0)
+    tl.Size = UDim2.new(1, 0, 0.32, 0)
     tl.BackgroundTransparency = 1
     tl.Font = Enum.Font.BuilderSansBold
     tl.TextColor3 = col
-    tl.TextStrokeTransparency = 0
+    tl.TextStrokeTransparency = 1
     tl.TextScaled = true
     tl.LayoutOrder = 1
-    tl.Parent = wrapper
+    tl.Parent = bb
     data.tl = tl
     
+    local ts = Instance.new("UIStroke")
+    ts.Thickness = 1
+    ts.Color = Color3.fromRGB(0, 0, 0)
+    ts.Transparency = 0
+    ts.Parent = tl
+    
     local gf = Instance.new("Frame")
-    gf.Size = UDim2.new(1, 0, 0.65, 0)
+    gf.Size = UDim2.new(1, 0, 0.62, 0)
     gf.BackgroundTransparency = 1
     gf.LayoutOrder = 2
-    gf.Parent = wrapper
+    gf.Parent = bb
     
-    local gd = Instance.new("UIGridLayout")
-    gd.CellSize = UDim2.new(0.49, 0, 0.48, 0)
-    gd.SortOrder = Enum.SortOrder.LayoutOrder
-    gd.FillDirection = Enum.FillDirection.Horizontal
-    gd.Parent = gf
+    local leftCol = Instance.new("Frame")
+    leftCol.Size = UDim2.new(0.5, -2, 1, 0)
+    leftCol.Position = UDim2.new(0, 0, 0, 0)
+    leftCol.BackgroundTransparency = 1
+    leftCol.Parent = gf
+    
+    local ll = Instance.new("UIListLayout")
+    ll.SortOrder = Enum.SortOrder.LayoutOrder
+    ll.Padding = UDim.new(0.04, 0)
+    ll.Parent = leftCol
+    
+    local rightCol = Instance.new("Frame")
+    rightCol.Size = UDim2.new(0.5, -2, 1, 0)
+    rightCol.Position = UDim2.new(0.5, 2, 0, 0)
+    rightCol.BackgroundTransparency = 1
+    rightCol.Parent = gf
+    
+    local rl = Instance.new("UIListLayout")
+    rl.SortOrder = Enum.SortOrder.LayoutOrder
+    rl.Padding = UDim.new(0.04, 0)
+    rl.Parent = rightCol
     
     if cfg.Stats then
         local sk = {}
@@ -174,15 +181,27 @@ local function create(obj, cfg)
         
         for i, k in ipairs(sk) do
             local lbl = Instance.new("TextLabel")
-            lbl.Size = UDim2.new(1, 0, 1, 0)
+            lbl.Size = UDim2.new(1, 0, 0.44, 0)
             lbl.BackgroundTransparency = 1
             lbl.Font = Enum.Font.BuilderSansMedium
             lbl.TextColor3 = col
-            lbl.TextStrokeTransparency = 0
+            lbl.TextStrokeTransparency = 1
             lbl.TextXAlignment = Enum.TextXAlignment.Left
             lbl.TextScaled = true
             lbl.LayoutOrder = i
-            lbl.Parent = gf
+            
+            local ls = Instance.new("UIStroke")
+            ls.Thickness = 1
+            ls.Color = Color3.fromRGB(0, 0, 0)
+            ls.Transparency = 0
+            ls.Parent = lbl
+            
+            if i % 2 == 1 then
+                lbl.Parent = leftCol
+            else
+                lbl.Parent = rightCol
+            end
+            
             data.lbls[k] = lbl
         end
     end
