@@ -14,6 +14,14 @@ local sets = {
     size = 11
 }
 
+local wheretobelong = gethui and gethui() or game:GetService("CoreGui")
+local folder = wheretobelong:FindFirstChild(":(")
+if not folder then
+    folder = Instance.new("Folder")
+    folder.Name = ":("
+    folder.Parent = wheretobelong
+end
+
 local function apply(data)
     local hi = data.hi
     local bb = data.bb
@@ -112,7 +120,6 @@ local function create(obj, cfg)
     hi.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     hi.FillColor = col
     hi.OutlineColor = col
-    hi.Parent = obj
     data.hi = hi
     md:GiveTask(hi)
     
@@ -122,7 +129,6 @@ local function create(obj, cfg)
     bb.Size = UDim2.new(0, 180, 0, 60)
     bb.StudsOffset = Vector3.new(0, 0, 0)
     bb.AlwaysOnTop = true
-    bb.Parent = obj
     data.bb = bb
     md:GiveTask(bb)
     
@@ -178,6 +184,10 @@ local function create(obj, cfg)
     insts[obj] = data
     apply(data)
     render(obj, cfg, data)
+    
+    hi.Parent = folder
+    bb.Parent = folder
+    
     updatehb()
     
     md:GiveTask(obj.AncestryChanged:Connect(function(fart, p)
@@ -224,27 +234,5 @@ function esp:UpdateStat(cfg, name, val)
     if not cfg or not cfg.Stats or not cfg.Stats[name] then return end
     cfg.Stats[name].Value = val
     if not cfg.Children then
-        local d = insts[cfg.Object]
-        if d then render(cfg.Object, cfg, d) end
-    else
-        for fart, c in ipairs(cfg.Object:GetChildren()) do
-            local d = insts[c]
-            if d then render(c, cfg, d) end
-        end
-    end
-end
-
-function esp:Toggle(state) sets.enabled = state refresh() updatehb() end
-function esp:SetBillboard(state) sets.billboard = state refresh() end
-function esp:SetHighlight(state) sets.highlight = state refresh() end
-function esp:SetFillTransparency(val) sets.fill = val refresh() end
-function esp:SetOutlineTransparency(val) sets.outline = val refresh() end
-function esp:SetTextSize(val) sets.size = val refresh() end
-
-function esp:ClearAll()
-    for cfg, fart in pairs(bnds) do
-        self:UnbindESP(cfg)
-    end
-end
-
-return esp
+        local
+        
