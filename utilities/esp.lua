@@ -28,7 +28,7 @@ local function apply(data)
     end
     if bb then
         bb.Enabled = sets.enabled and sets.billboard
-        bb.Size = UDim2.new(sets.size * 0.7, 0, sets.size * 0.22, 0)
+        bb.Size = UDim2.new(sets.size * 0.8, 0, sets.size * 0.25, 0)
     end
 end
 
@@ -125,31 +125,42 @@ local function create(obj, cfg)
     data.bb = bb
     md:GiveTask(bb)
     
+    local wrapper = Instance.new("Frame")
+    wrapper.Name = "freezvee"
+    wrapper.Size = UDim2.new(1, 0, 1, 0)
+    wrapper.BackgroundTransparency = 1
+    wrapper.Parent = bb
+    
+    local szc = Instance.new("UISizeConstraint")
+    szc.MinSize = Vector2.new(150, 50)
+    szc.MaxSize = Vector2.new(300, 100)
+    szc.Parent = wrapper
+    
     local vl = Instance.new("UIListLayout")
     vl.SortOrder = Enum.SortOrder.LayoutOrder
     vl.HorizontalAlignment = Enum.HorizontalAlignment.Center
     vl.Padding = UDim.new(0.02, 0)
-    vl.Parent = bb
+    vl.Parent = wrapper
     
     local tl = Instance.new("TextLabel")
-    tl.Size = UDim2.new(1, 0, 0.28, 0)
+    tl.Size = UDim2.new(1, 0, 0.3, 0)
     tl.BackgroundTransparency = 1
     tl.Font = Enum.Font.BuilderSansBold
     tl.TextColor3 = col
     tl.TextStrokeTransparency = 0
     tl.TextScaled = true
     tl.LayoutOrder = 1
-    tl.Parent = bb
+    tl.Parent = wrapper
     data.tl = tl
     
     local gf = Instance.new("Frame")
-    gf.Size = UDim2.new(1, 0, 0.68, 0)
+    gf.Size = UDim2.new(1, 0, 0.65, 0)
     gf.BackgroundTransparency = 1
     gf.LayoutOrder = 2
-    gf.Parent = bb
+    gf.Parent = wrapper
     
     local gd = Instance.new("UIGridLayout")
-    gd.CellSize = UDim2.new(0.49, 0, 0.45, 0)
+    gd.CellSize = UDim2.new(0.49, 0, 0.48, 0)
     gd.SortOrder = Enum.SortOrder.LayoutOrder
     gd.FillDirection = Enum.FillDirection.Horizontal
     gd.Parent = gf
