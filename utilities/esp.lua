@@ -36,6 +36,26 @@ end
 
 local function render(obj, cfg, data)
     if not data or not data.bb then return end
+    
+    local cam = workspace.CurrentCamera
+    local hd = data.bb.Adornee
+    if cam and hd then
+        local pos = hd:IsA("BasePart") and hd.Position or (hd:IsA("Model") and hd:GetPivot().Position)
+        if pos then
+            local dist = (cam.CFrame.Position - pos).Magnitude
+            local calculatedThickness = math.clamp(35 / dist, 0.3, 1.2)
+            
+            if data.ts then 
+                data.ts.Thickness = calculatedThickness 
+            end
+            if data.ls then
+                for _, stroke in pairs(data.ls) do
+                    stroke.Thickness = calculatedThickness
+                end
+            end
+        end
+    end
+
     local name = cfg.Name or obj.Name
     if cfg.NamingMethods and typeof(cfg.NamingMethods) == "function" then
         local res = cfg.NamingMethods(obj)
@@ -100,7 +120,7 @@ local function create(obj, cfg)
     
     local col = cfg.Color or Color3.fromRGB(255, 80, 80)
     local md = maid.new()
-    local data = {cfg = cfg, lbls = {}, md = md}
+    local data = {cfg = cfg, lbls = {}, ls = {}, md = md}
     
     local hi = Instance.new("Highlight")
     hi.Name = "[linear] hl"
@@ -145,6 +165,7 @@ local function create(obj, cfg)
     ts.Transparency = 0
     ts.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
     ts.Parent = tl
+    data.ts = ts
     
     local gf = Instance.new("Frame")
     gf.Size = UDim2.new(0.95, 0, 0.6, 0)
@@ -190,6 +211,7 @@ local function create(obj, cfg)
             ls.Parent = lbl
             
             data.lbls[k] = lbl
+            data.ls[k] = ls
         end
     end
     
