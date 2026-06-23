@@ -15,7 +15,7 @@ local sets = {
     billboard = true,
     fill = 0.65,
     outline = 0.7,
-    size = 12
+    size = 11
 }
 
 local function apply(data)
@@ -123,7 +123,7 @@ local function create(obj, cfg)
     local bb = Instance.new("BillboardGui")
     bb.Name = "[linear] bb"
     bb.Adornee = hd
-    bb.Size = UDim2.new(12, 0, 3.5, 0)
+    bb.Size = UDim2.new(0, 180, 0, 60)
     bb.StudsOffset = Vector3.new(0, 3, 0)
     bb.AlwaysOnTop = true
     bb.Parent = obj
@@ -133,28 +133,27 @@ local function create(obj, cfg)
     local vl = Instance.new("UIListLayout")
     vl.SortOrder = Enum.SortOrder.LayoutOrder
     vl.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    vl.Padding = UDim.new(0.05, 0)
+    vl.Padding = UDim.new(0, 2)
     vl.Parent = bb
     
     local tl = Instance.new("TextLabel")
-    tl.Size = UDim2.new(1, 0, 0.3, 0)
+    tl.Size = UDim2.new(1, 0, 0, 16)
     tl.BackgroundTransparency = 1
-    tl.Font = Enum.Font.FredokaOne
+    tl.Font = Enum.Font.BuilderSansBold
     tl.TextColor3 = col
     tl.TextStrokeTransparency = 0
-    tl.TextScaled = true
     tl.LayoutOrder = 1
     tl.Parent = bb
     data.tl = tl
     
     local gf = Instance.new("Frame")
-    gf.Size = UDim2.new(1, 0, 0.65, 0)
+    gf.Size = UDim2.new(1, 0, 1, -18)
     gf.BackgroundTransparency = 1
     gf.LayoutOrder = 2
     gf.Parent = bb
     
     local gd = Instance.new("UIGridLayout")
-    gd.CellSize = UDim2.new(0.48, 0, 0.48, 0)
+    gd.CellSize = UDim2.new(0.5, -4, 0, 13)
     gd.SortOrder = Enum.SortOrder.LayoutOrder
     gd.FillDirection = Enum.FillDirection.Horizontal
     gd.Parent = gf
@@ -170,11 +169,10 @@ local function create(obj, cfg)
             local lbl = Instance.new("TextLabel")
             lbl.Size = UDim2.new(1, 0, 1, 0)
             lbl.BackgroundTransparency = 1
-            lbl.Font = Enum.Font.FredokaOne
+            lbl.Font = Enum.Font.BuilderSansMedium
             lbl.TextColor3 = col
             lbl.TextStrokeTransparency = 0
             lbl.TextXAlignment = Enum.TextXAlignment.Left
-            lbl.TextScaled = true
             lbl.LayoutOrder = i
             lbl.Parent = gf
             data.lbls[k] = lbl
