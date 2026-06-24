@@ -20,8 +20,8 @@ return {
     
     -- automation --
     CalibrationGroupboxTitle = "Calibration",
-    AutoMachTypesTitle = "Machines To Calibrate",
-    AutoMachTypesDescription = "The machines to automatically calibrate on.",
-    AutoMachTitle = "Auto Calibration",
-    AutoMachDescription = "Automatically calibrates for you.",
+    AutoDefaultMachTitle = "Auto Calibrate Default Machines",
+    AutoDefaultMachDescription = "Automatically calibrates the default machines for you.",
+    AutoDroneMachTitle = "Auto Calibrate Drone Machines",
+    AutoDroneMachDescription = "Automatically calibrates the drone machines that appear in the gardenview for you.",
 }
