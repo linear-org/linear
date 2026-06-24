@@ -39,8 +39,8 @@ function intro:Start()
 	local bgfadein = tweenservice:Create(bg, fadeinfo, {BackgroundTransparency = 0})
 	bgfadein:Play()
 
-	repeat task.wait() until bg.BackgroundTransparency <= 0.17
-
+	task.wait(0.18)
+	
 	local startvideo = Instance.new("VideoFrame")
 	startvideo.Name = "start"
 	startvideo.Size = UDim2.new(0.15, 0, 0.15, 0)
