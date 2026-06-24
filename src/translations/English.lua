@@ -18,10 +18,16 @@ return {
     InfiniteStaminaTitle = "Infinite Stamina",
     InfiniteStaminaDescription = "Makes so you never run out of stamina.",
     
+    ItemsGroupboxTitle = "Items",
+    TakeOneStuffingSampleTitle = "Take One Stuffing Sample",
+    TakeOneStuffingSampleDescription = "Takes one of the stuffing samples.",
+    
     -- automation --
     CalibrationGroupboxTitle = "Calibration",
     AutoDefaultMachTitle = "Auto Calibrate Default Machines",
     AutoDefaultMachDescription = "Automatically calibrates the default machines for you.",
     AutoDroneMachTitle = "Auto Calibrate Drone Machines",
     AutoDroneMachDescription = "Automatically calibrates the drone machines that appear in the gardenview for you.",
+    MachineAntiKickTitle = "Anti Machine Kicking",
+    MachineAntiKickDescription = "Prevents the machine from kicking you out.",
 }
