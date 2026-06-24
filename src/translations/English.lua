@@ -22,12 +22,22 @@ return {
     TakeOneStuffingSampleTitle = "Take One Stuffing Sample",
     TakeOneStuffingSampleDescription = "Takes one of the stuffing samples.",
     
+    UtilityGroupboxTitle = "Utilities",
+    HealMaxTitle = "Fully Heal Yourself (Free)",
+    HealMaxDescription = "Heals you to the max, you might lose your items when using this feature.",
+    ReviveTitle = "Revive Yourself (Free)",
+    ReviveDescription = "Revives you for free, there's a very slight chance that you might lose your ability to extract when using this feature.",
+    
+    -- visuals --
+    PerformanceGroupboxTitle = "Performance",
+    DisableRenderingTitle = "Disable Rendering",
+    DisableRenderingDescription = "Saves power and performance.",
+    
     -- automation --
     CalibrationGroupboxTitle = "Calibration",
     AutoDefaultMachTitle = "Auto Calibrate Default Machines",
     AutoDefaultMachDescription = "Automatically calibrates the default machines for you.",
     AutoDroneMachTitle = "Auto Calibrate Drone Machines",
     AutoDroneMachDescription = "Automatically calibrates the drone machines that appear in the gardenview for you.",
-    MachineAntiKickTitle = "Anti Machine Kicking",
-    MachineAntiKickDescription = "Prevents the machine from kicking you out.",
+    
 }
