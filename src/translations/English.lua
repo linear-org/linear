@@ -26,7 +26,7 @@ return {
     HealMaxTitle = "Fully Heal Yourself (Free)",
     HealMaxDescription = "Heals you to the max, you might lose your items when using this feature.",
     ReviveTitle = "Revive Yourself (Free)",
-    ReviveDescription = "Revives you for free, there's a very slight chance that you might lose your ability to extract when using this feature.",
+    ReviveDescription = "Revives you for free, there's a very slight chance that you might lose your ability to extract when using this feature. You need to spectate an alive teammate in order to use this feature.",
     
     -- visuals --
     PerformanceGroupboxTitle = "Performance",
@@ -40,4 +40,13 @@ return {
     AutoDroneMachTitle = "Auto Calibrate Drone Machines",
     AutoDroneMachDescription = "Automatically calibrates the drone machines that appear in the gardenview for you.",
     
+    -- errors --
+    PlayerHumanoidMissing = "Where'd your humanoid go?",
+    PlayerDead = "You aren't alive!",
+    PlayerAlive = "You aren't dead!",
+    PlayerNotSpectating = "You aren't spectating anybody!",
+    
+    -- notifications --
+    RenderingEnabled = "Rendering enabled!",
+    RenderingDisabled = "Rendering disabled!",
 }
