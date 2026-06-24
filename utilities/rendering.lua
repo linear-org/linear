@@ -22,7 +22,7 @@ function Rendering:Set(bool, id)
 
 			local screengui = Instance.new("ScreenGui")
 			screengui.ScreenInsets = Enum.ScreenInsets.None
-			screengui.LayoutOrder = -1
+			screengui.DisplayOrder = -1
 			screengui.Name = "linear, no render"
 			screengui.ResetOnSpawn = false
 
