@@ -17,4 +17,11 @@ return {
     MovementGroupboxTitle = "Movement",
     InfiniteStaminaTitle = "Infinite Stamina",
     InfiniteStaminaDescription = "Makes so you never run out of stamina.",
+    
+    -- automation --
+    CalibrationGroupboxTitle = "Calibration",
+    AutoMachTypesTitle = "Machines To Calibrate",
+    AutoMachTypesDescription = "The machines to automatically calibrate on.",
+    AutoMachTitle = "Auto Calibration",
+    AutoMachDescription = "Automatically calibrates for you.",
 }
