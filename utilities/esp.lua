@@ -9,8 +9,8 @@ local sets = {
     enabled = true,
     highlight = true,
     billboard = true,
-    fill = 0.65,
-    outline = 0.7,
+    fill = 0.5,
+    outline = 0.1,
     size = 11
 }
 
@@ -36,25 +36,6 @@ end
 
 local function render(obj, cfg, data)
     if not data or not data.bb then return end
-    
-    local cam = workspace.CurrentCamera
-    local hd = data.bb.Adornee
-    if cam and hd then
-        local pos = hd:IsA("BasePart") and hd.Position or (hd:IsA("Model") and hd:GetPivot().Position)
-        if pos then
-            local dist = (cam.CFrame.Position - pos).Magnitude
-            local calculatedThickness = math.clamp(35 / dist, 0.3, 1.2)
-            
-            if data.ts then 
-                data.ts.Thickness = calculatedThickness 
-            end
-            if data.ls then
-                for _, stroke in pairs(data.ls) do
-                    stroke.Thickness = calculatedThickness
-                end
-            end
-        end
-    end
 
     local name = cfg.Name or obj.Name
     if cfg.NamingMethods and typeof(cfg.NamingMethods) == "function" then
@@ -153,19 +134,19 @@ local function create(obj, cfg)
     tl.BackgroundTransparency = 1
     tl.Font = Enum.Font.BuilderSansBold
     tl.TextColor3 = col
-    tl.TextStrokeTransparency = 1
+    tl.TextStrokeTransparency = 0
     tl.TextScaled = true
     tl.LayoutOrder = 1
     tl.Parent = bb
     data.tl = tl
-    
+    --[[
     local ts = Instance.new("UIStroke")
     ts.Thickness = 1.2
     ts.Color = Color3.fromRGB(0, 0, 0)
     ts.Transparency = 0
     ts.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
     ts.Parent = tl
-    data.ts = ts
+    data.ts = ts]]
     
     local gf = Instance.new("Frame")
     gf.Size = UDim2.new(0.95, 0, 0.6, 0)
@@ -197,21 +178,21 @@ local function create(obj, cfg)
             lbl.BackgroundTransparency = 1
             lbl.Font = Enum.Font.BuilderSansMedium
             lbl.TextColor3 = col
-            lbl.TextStrokeTransparency = 1
+            lbl.TextStrokeTransparency = 0
             lbl.TextXAlignment = Enum.TextXAlignment.Center
             lbl.TextScaled = true
             lbl.LayoutOrder = i
             lbl.Parent = gf
-            
+            --[[
             local ls = Instance.new("UIStroke")
             ls.Thickness = 1.1
             ls.Color = Color3.fromRGB(0, 0, 0)
             ls.Transparency = 0
             ls.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
             ls.Parent = lbl
-            
+            ]]
             data.lbls[k] = lbl
-            data.ls[k] = ls
+            -- data.ls[k] = ls
         end
     end
     
