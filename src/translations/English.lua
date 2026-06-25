@@ -1,33 +1,33 @@
+--[[
+      HIGHLY UNSTABLE VERSION
+!!!      DO NOT TRANSLATE       !!!
+]]
+
 return {
     -- tabs --
     MainTabTitle = "Main",
-    MainTabDescription = "General info and community links.",
     PlayerTabTitle = "Player",
-    PlayerTabDescription = "Features that are dependent on you.",
     VisualsTabTitle = "Visuals",
-    VisualsTabDescription = "Things that only you can see on your screen.",
     AutomationTabTitle = "Automation",
-    AutomationTabDescription = "Features that run automatically for you.",
     FunTabTitle = "Fun",
-    FunTabDescription = "Stuff for messing around and having fun.",
+    DonorTabTitle = "Donor",
     SettingsTabTitle = "Settings",
-    SettingsTabDescription = "Options to change how the UI works.",
     
     -- player --
     MovementGroupboxTitle = "Movement",
+    MovementGroupboxDesc = "Character based utilities.",
     InfiniteStaminaTitle = "Infinite Stamina",
-    InfiniteStaminaDescription = "Makes so you never run out of stamina.",
-    
-    ItemsGroupboxTitle = "Items",
-    TakeOneStuffingSampleTitle = "Take One Stuffing Sample",
-    TakeOneStuffingSampleDescription = "Takes one of the stuffing samples.",
-    
-    UtilityGroupboxTitle = "Utilities",
-    HealMaxTitle = "Fully Heal Yourself (Free)",
-    HealMaxDescription = "Heals you to the max, you might lose your items when using this feature.",
-    ReviveTitle = "Revive Yourself (Free)",
-    ReviveDescription = "Revives you for free, there's a very slight chance that you might lose your ability to extract when using this feature. You need to spectate an alive teammate in order to use this feature.",
-    
+    InfiniteStaminaDesc = "Makes so you never run out of stamina.",
+    WalkingSpeedSliderTitle = "Walking Speed",
+    WalkingSpeedSliderDesc = "What shall your walking speed be.",
+    RunningSpeedSliderTitle = "Running Speed",
+    RunningSpeedSliderDesc = "What shall your running speed be.",
+    OverrideSpeedTitle = "Override Speed",
+    OverrideSpeedDesc = "Applies the new walking & speeds you've chosen.",
+
+
+
+--[[
     -- visuals --
     PerformanceGroupboxTitle = "Performance",
     DisableRenderingTitle = "Disable Rendering",
@@ -49,4 +49,5 @@ return {
     -- notifications --
     RenderingEnabled = "Rendering enabled!",
     RenderingDisabled = "Rendering disabled!",
+    ]]
 }
