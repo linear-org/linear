@@ -25,6 +25,7 @@ end
 local function apply(data)
     local hi = data.hi
     local bb = data.bb
+    local sc = data.sc
     if hi then
         hi.Enabled = sets.enabled and sets.highlight
         hi.FillTransparency = sets.fill
@@ -32,11 +33,9 @@ local function apply(data)
     end
     if bb then
         bb.Enabled = sets.enabled and sets.billboard
-        for fart, v in ipairs(bb:GetDescendants()) do
-            if v:IsA("TextLabel") then
-                v.TextSize = sets.size
-            end
-        end
+    end
+    if sc then
+        sc.Scale = sets.size / 11
     end
 end
 
@@ -105,6 +104,15 @@ end
 local function create(obj, cfg)
     if not obj or insts[obj] then return end
     
+    local ignore = cfg.ignore or cfg.Ignore
+    if ignore then
+        for fart, v in ipairs(ignore) do
+            if v == obj or (typeof(v) == "string" and obj.Name == v) then
+                return
+            end
+        end
+    end
+    
     local hd = obj
     if obj:IsA("Model") then
         hd = obj.PrimaryPart or obj:FindFirstChild("HumanoidRootPart") or obj:FindFirstChild("Head") or obj:FindFirstChildWhichIsA("BasePart", true) or obj
@@ -132,27 +140,41 @@ local function create(obj, cfg)
     data.bb = bb
     md:GiveTask(bb)
     
+    local container = Instance.new("Frame")
+    container.Name = "container"
+    container.Size = UDim2.new(1, 0, 1, 0)
+    container.AnchorPoint = Vector2.new(0.5, 0.5)
+    container.Position = UDim2.new(0.5, 0, 0.5, 0)
+    container.BackgroundTransparency = 1
+    container.Parent = bb
+    
+    local sc = Instance.new("UIScale")
+    sc.Name = "scale"
+    sc.Parent = container
+    data.sc = sc
+    
     local vl = Instance.new("UIListLayout")
     vl.SortOrder = Enum.SortOrder.LayoutOrder
     vl.HorizontalAlignment = Enum.HorizontalAlignment.Center
     vl.Padding = UDim.new(0, 2)
-    vl.Parent = bb
+    vl.Parent = container
     
     local tl = Instance.new("TextLabel")
     tl.Size = UDim2.new(1, 0, 0, 16)
+    tl.TextSize = 11
     tl.BackgroundTransparency = 1
     tl.Font = Enum.Font.BuilderSansBold
     tl.TextColor3 = col
     tl.TextStrokeTransparency = 0
     tl.LayoutOrder = 1
-    tl.Parent = bb
+    tl.Parent = container
     data.tl = tl
     
     local gf = Instance.new("Frame")
     gf.Size = UDim2.new(1, 0, 1, -18)
     gf.BackgroundTransparency = 1
     gf.LayoutOrder = 2
-    gf.Parent = bb
+    gf.Parent = container
     
     local gd = Instance.new("UIGridLayout")
     gd.CellSize = UDim2.new(0.5, -4, 0, 13)
@@ -170,6 +192,7 @@ local function create(obj, cfg)
         for i, k in ipairs(sk) do
             local lbl = Instance.new("TextLabel")
             lbl.Size = UDim2.new(1, 0, 1, 0)
+            lbl.TextSize = 11
             lbl.BackgroundTransparency = 1
             lbl.Font = Enum.Font.BuilderSansMedium
             lbl.TextColor3 = col
@@ -215,6 +238,11 @@ function esp:BindESP(cfg)
         end
         md:GiveTask(root.ChildRemoved:Connect(remove))
     end
+    
+    md:GiveTask(root.AncestryChanged:Connect(function(fart, p)
+        if not p then self:UnbindESP(cfg) end
+    end))
+    
     return cfg
 end
 
