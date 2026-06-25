@@ -288,9 +288,3 @@ function esp:ClearAll()
 end
 
 return esp
-
-
-
-
-
-This uses scale instead of offset so it doesn't resize with the camera.
