@@ -13,6 +13,8 @@ local player = players.LocalPlayer
 local toolcontroller = require(player.PlayerScripts.Client.ToolClient)
 local toolpackets = require(rst.Shared.ByteNetPackets.ToolPackets)
 
+local panicmodebar = player.PlayerGui.GameUI.HUD.Timer
+
 function library.Items.GetItemsOnFloor()
 	if not vfx then return {} end
 	local items = {}
@@ -217,6 +219,9 @@ function library.Environment.GetGameState()
 	local map = library.Environment.GetMap()
 	if not map then
 		return "Intermission"
+	end
+	if panicmodebar and panicmodebar.Visible then
+		return "Panic"
 	end
 	local mapinteract = map:FindFirstChild("Interact")
 	if mapinteract and mapinteract:FindFirstChild("TeslaCoil") then
