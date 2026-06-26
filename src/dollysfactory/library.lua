@@ -70,10 +70,10 @@ function library.Items.OnItemAdded(callback)
 	return vfx.ChildAdded:Connect(function(child)
 		if child:IsA("Part") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt") or child:WaitForChild("ProximityPrompt", 1)
-			local name = prompt and prompt.ActionText or "Unknown Item"
-			local rarity = child.Name
-			local path = child			
-			callback(name, rarity, path)
+			local Name = prompt and prompt.ActionText or "Unknown Item"
+			local Rarity = child.Name
+			local Path = child			
+			callback(Name, Path, Rarity)
 		end
 	end)
 end
