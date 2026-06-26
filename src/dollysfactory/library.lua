@@ -114,6 +114,26 @@ function library.Items.UnequipEquipped()
 	end
 end
 
+function library.Items.GetStuffingPiles()
+	local pickup = workspace:FindFirstChild("Pickup")
+	local stuffingstuff = pickup and pickup:FindFirstChild("Stuffing")
+	if not stuffingstuff then return {} end
+	return stuffingstuff:GetChildren()
+end
+
+function library.Items.TakeStuffingPile(stuff)
+	if not stuff then return end
+	local main = stuff:FindFirstChild("Main")
+	local prompt = main and main:FindFirstChildOfClass("ProximityPrompt")
+	if prompt then
+		if fireproximityprompt then
+			fireproximityprompt(prompt)
+		else
+			warn("linear DF library | fireproximityprompt is not supported..")
+		end
+	end
+end
+
 function library.Machines.GetMachinesOnFloor()
 	local machines = {}
 	if not interacts then return machines end
