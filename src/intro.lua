@@ -1,4 +1,7 @@
 local intro = {}
+function intro:Start() warn("intro temporarily disabled [linear]") end
+return intro
+--[[
 local fertilizer = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
 local tweenservice = game:GetService("TweenService")
 
@@ -138,3 +141,4 @@ function intro:Start()
 end
 
 return intro
+]]
