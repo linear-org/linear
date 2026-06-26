@@ -56,6 +56,10 @@ return {
     TakeOneItemDesc = "Takes one singular item if found.",
     TakeAllItemsTitle = "Take All Items",
     TakeAllItemsDesc = "Takes every item if found.",
+    GriefOneItemTitle = "Grief One Item",
+    GriefOneItemDesc = "Takes one of the items on the map and teleports it to somewhere inaccessible.",
+    GriefAllItemsTitle = "Grief All Items",
+    GriefAllItemsDesc = "Takes all of the items on the map and teleports them to somewhere inaccessible.",
     
     -- automation --
     CalibrationGroupboxTitle = "Calibration",
@@ -87,3 +91,4 @@ return {
     RenderingDisabled = "Rendering disabled!",
     ]]
 }
+
