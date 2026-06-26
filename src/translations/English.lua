@@ -24,6 +24,9 @@ return {
     RunningSpeedSliderDesc = "What shall your running speed be.",
     OverrideSpeedTitle = "Overwrite Speed",
     OverrideSpeedDesc = "Applies the new walking & speeds you've chosen.",
+    NoclipTitle = "Noclip",
+    NoclipDesc = "Let's you go through walls.",
+    
     
     ItemsGroupboxTitle = "Items",
     ItemsGroupboxDesc = "Items based utilities.",
@@ -61,6 +64,13 @@ return {
     GriefAllItemsTitle = "Grief All Items",
     GriefAllItemsDesc = "Takes all of the items on the map and teleports them to somewhere inaccessible.",
     
+    -- visuals --
+    PerformanceGroupboxTitle = "Performance",
+    PerformanceGroupboxDesc = "Utilities about performance.",
+    
+    DisableRenderingTitle = "Disable Rendering",
+    DisableRenderingDesc = "Disables 3D rendering to improve performance and prevent overheating.",
+    
     -- automation --
     CalibrationGroupboxTitle = "Calibration",
     CalibrationGroupboxDesc = "Machine based utilities.",
@@ -70,6 +80,10 @@ return {
     AutoDroneMachTitle = "Auto Calibrate Drone Machines",
     AutoDroneMachDesc = "Automatically calibrates the drone machines that appear in the gardenview for you.",
 
+    AutofarmGroupboxTitle = "Autofarm",
+    AutofarmGroupboxDesc = "Plays the game for you.",
+    ToggleAutofarmTitle = "Toggle Autofarm",
+    ToggleAutofarmDesc = "Toggles the auto-farm, if you want to save peformance to prevent disconnecting and overheating, you can turn on the ‘Disable Rendering’ feature located in Visuals > Performance.",
 --[[
     -- visuals --
     PerformanceGroupboxTitle = "Performance",
@@ -91,4 +105,3 @@ return {
     RenderingDisabled = "Rendering disabled!",
     ]]
 }
-
