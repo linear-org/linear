@@ -13,7 +13,7 @@ function library.Items.GetItemsOnFloor()
 	local children = vfx:GetChildren()
 	local found = false
 	for fart, child in ipairs(children) do
-		if child:IsA("Model") then
+		if child:IsA("Part") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt")
 			if prompt then
 				found = true
@@ -31,7 +31,7 @@ function library.Items.GetItemsOnFloor()
 end
 
 function library.Items.PickItem(obj)
-	if not obj or not obj:IsA("Model") then return end
+	if not obj or not obj:IsA("Part") then return end
 	local part = obj:FindFirstChildWhichIsA("BasePart")
 	local prompt = obj:FindFirstChildOfClass("ProximityPrompt")
 	if not prompt then
@@ -57,7 +57,7 @@ function library.Items.PickItemByName(name)
 	local children = vfx:GetChildren()
 	local found = false
 	for fart, child in ipairs(children) do
-		if child:IsA("Model") then
+		if child:IsA("Part") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt")
 			if prompt and prompt.ActionText == name then
 				found = true
@@ -74,7 +74,7 @@ end
 function library.Items.OnItemAdded(callback)
     if not vfx then return end
 	return vfx.ChildAdded:Connect(function(child)
-		if child:IsA("Model") then
+		if child:IsA("Part") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt") or child:WaitForChild("ProximityPrompt", 1)
 			local name = prompt and prompt.ActionText or "Unknown Item"
 			local rarity = child.Name
