@@ -264,4 +264,16 @@ function library.Environment.GetGameState()
 	return "TrainParts"
 end
 
+function library.Environment.OnGameStateChanged(callback)
+	local laststate = library.Environment.GetGameState()	
+	local connection = RunService.Heartbeat:Connect(function()
+		local currentstate = library.Environment.GetGameState()
+		if currentstate ~= laststate then
+			laststate = currentstate
+			callback(currentstate)
+		end
+	end)
+	return connection
+end
+
 return library
