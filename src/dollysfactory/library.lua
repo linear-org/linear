@@ -125,11 +125,18 @@ function library.Items.TakeStuffingPile(stuff)
 	if not stuff then return end
 	local main = stuff:FindFirstChild("Main")
 	local prompt = main and main:FindFirstChildOfClass("ProximityPrompt")
-	if prompt then
-		if fireproximityprompt then
-			fireproximityprompt(prompt)
-		else
-			warn("linear DF library | fireproximityprompt is not supported..")
+	if main and player.Character then
+		local root = player.Character:FindFirstChild("HumanoidRootPart")
+		if root then
+			root.CFrame = main.CFrame
+			task.wait(0.2)
+			if prompt then
+				if fireproximityprompt then
+					fireproximityprompt(prompt)
+				else
+					warn("linear DF library | fireproximityprompt is not supported..")
+				end
+			end
 		end
 	end
 end
