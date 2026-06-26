@@ -95,13 +95,10 @@ function library.Items.DropEquipped()
 end
 
 function library.Items.DropSlot(num)
-	if toolpackets then
-		local success, res = pcall(require, toolpackets)
-		if success and res and res.dropTool then
-			res.dropTool.send({
-				slot = num
-			})
-		end
+	if toolpackets and toolpackets.dropTool then
+		toolpackets.dropTool.send({
+			slot = num
+		})
 	end
 end
 
