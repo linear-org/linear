@@ -1,6 +1,8 @@
 local library = {}
+
 library.Items = {}
 library.Machines = {}
+library.Environment = {}
 
 local vfx = workspace:FindFirstChild("VFX")
 local interacts = workspace:FindFirstChild("Interacts")
@@ -196,6 +198,38 @@ function library.Machines.OnMachineAdded(callback)
 			callback(child, machinetype)
 		end
 	end)
+end
+
+function library.Environment.GetMap()
+	return workspace:FindFirstChild("Map") or nil
+end
+
+function library.Environment.OnMapLoaded(callback)
+	return workspace.ChildAdded:Connect(function(child)
+		if child.Name == "Map" then
+			task.wait(1)
+			callback(child)
+		end
+	end)
+end
+
+function library.Environment.GetGameState()
+	local map = library.Environment.GetMap()
+	if not map then
+		return "Intermission"
+	end
+	local mapinteract = map:FindFirstChild("Interact")
+	if mapinteract and mapinteract:FindFirstChild("TeslaCoil") then
+		return "TeslaCoil"
+	end
+	if interacts then
+		if interacts:FindFirstChild("Plushie") then
+			return "Default"
+		elseif interacts:FindFirstChild("Drone") then
+			return "Gardenview"
+		end
+	end
+	return "TrainParts"
 end
 
 return library
