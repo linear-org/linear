@@ -32,7 +32,7 @@ end
 
 function library.Items.PickItem(obj)
 	if not obj or not obj:IsA("Part") then return end
-	local part = obj:FindFirstChildWhichIsA("BasePart")
+	local part = obj
 	local prompt = obj:FindFirstChildOfClass("ProximityPrompt")
 	if not prompt then
 		warn("linear DF library | couldn't find a prompt for the item: " .. tostring(obj.Name))
