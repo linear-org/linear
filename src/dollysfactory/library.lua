@@ -61,7 +61,7 @@ function library.Items.PickItemByName(name)
 				break
 			end
 		end
-	ens
+	end
 	if not found then
 		warn("linear DF library | couldn't find any item with the name “" .. name .. "” on the floor.")
 	end
