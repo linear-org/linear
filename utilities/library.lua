@@ -6,6 +6,14 @@ end
 
 local Linear = getgenv().Linear
 
+local folders = {"linear", "linear/audios", "linear/videos", "linear/images"}
+
+for _, folder in ipairs(folders) do
+    if not isfolder(folder) then
+        makefolder(folder)
+    end
+end
+
 Linear.Language = Linear.Language or "English"
 Linear.Loaded = Linear.Loaded or false
 Linear.UI = Linear.UI or nil
@@ -41,14 +49,5 @@ Linear.Utils.Translator = Linear.Utils.Translator or safeloadstring("https://raw
 Linear.Utils.Renderer = Linear.Utils.Renderer or safeloadstring("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/rendering.lua")
 Linear.Utils.Scrambler = Linear.Utils.Scrambler or safeloadstring("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/scrambler.lua")
 Linear.Utils.Intro = Linear.Utils.Intro or safeloadstring("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/src/intro.lua")
-
-Linear:Banner([[
-██╗░░░░░██╗███╗░░██╗███████╗░█████╗░██████╗░
-██║░░░░░██║████╗░██║██╔════╝██╔══██╗██╔══██╗
-██║░░░░░██║██╔██╗██║█████╗░░███████║██████╔╝
-██║░░░░░██║██║╚████║██╔══╝░░██╔══██║██╔══██╗
-███████╗██║██║░╚███║███████╗██║░░██║██║░░██║
-╚══════╝╚═╝╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝       
-]])
 
 return Linear
