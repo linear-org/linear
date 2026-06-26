@@ -277,7 +277,7 @@ function library.Environment.OnGameStateChanged(callback)
 	return connection
 end
 
-function Player.IsExtracting()
+function library.Player.IsExtracting()
 	local assets = rst:FindFirstChild("ReplicatedAssets")
 	if not assets then return false end
 	local folder = assets:FindFirstChildWhichIsA("Folder")
@@ -300,7 +300,7 @@ function Player.IsExtracting()
 	return false
 end
 
-function Player.OnExtractingChanged(callback)
+function library.Player.OnExtractingChanged(callback)
 	local laststate = Player.IsExtracting()
 	local connection = game:GetService("RunService").Heartbeat:Connect(function()
 		local currentstate = Player.IsExtracting()
