@@ -41,7 +41,7 @@ function library.Items.PickItem(obj)
 		local root = player.Character:FindFirstChild("HumanoidRootPart")
 		if root then
 			root.CFrame = part.CFrame
-			task.wait(0.1)
+			task.wait(0.2)
 			if fireproximityprompt then
 				fireproximityprompt(prompt)
 			else
