@@ -22,10 +22,16 @@ return {
     WalkingSpeedSliderDesc = "What shall your walking speed be.",
     RunningSpeedSliderTitle = "Running Speed",
     RunningSpeedSliderDesc = "What shall your running speed be.",
-    OverrideSpeedTitle = "Override Speed",
+    OverrideSpeedTitle = "Overwrite Speed",
     OverrideSpeedDesc = "Applies the new walking & speeds you've chosen.",
-
-
+    
+    -- automation --
+    CalibrationGroupboxTitle = "Calibration",
+    CalibrationGroupboxDesc = "Machine based utilities.",
+     AutoDefaultMachTitle = "Auto Calibrate Default Machines",
+     AutoDefaultMachDesc = "Automatically calibrates the default machines for you.",
+     AutoDroneMachTitle = "Auto Calibrate Drone Machines",
+     AutoDroneMachDesc = "Automatically calibrates the drone machines that appear in the gardenview for you.",
 
 --[[
     -- visuals --
@@ -34,11 +40,8 @@ return {
     DisableRenderingDescription = "Saves power and performance.",
     
     -- automation --
-    CalibrationGroupboxTitle = "Calibration",
-    AutoDefaultMachTitle = "Auto Calibrate Default Machines",
-    AutoDefaultMachDescription = "Automatically calibrates the default machines for you.",
-    AutoDroneMachTitle = "Auto Calibrate Drone Machines",
-    AutoDroneMachDescription = "Automatically calibrates the drone machines that appear in the gardenview for you.",
+    
+    
     
     -- errors --
     PlayerHumanoidMissing = "Where'd your humanoid go?",
