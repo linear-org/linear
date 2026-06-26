@@ -1,11 +1,14 @@
 local library = {}
 library.Items = {}
+library.Machines = {}
 
 local vfx = workspace:FindFirstChild("VFX")
+local interacts = workspace:FindFirstChild("Interacts")
 local players = game:GetService("Players")
 local player = players.LocalPlayer
 
 function library.Items.GetItemsOnFloor()
+    if not vfx then return end
 	local items = {}
 	local children = vfx:GetChildren()
 	local found = false
@@ -50,6 +53,7 @@ function library.Items.PickItem(obj)
 end
 
 function library.Items.PickItemByName(name)
+    if not vfx then return end
 	local children = vfx:GetChildren()
 	local found = false
 	for fart, child in ipairs(children) do
@@ -68,6 +72,7 @@ function library.Items.PickItemByName(name)
 end
 
 function library.Items.OnItemAdded(callback)
+    if not vfx then return end
 	return vfx.ChildAdded:Connect(function(child)
 		if child:IsA("Model") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt") or child:WaitForChild("ProximityPrompt", 1)
@@ -75,6 +80,91 @@ function library.Items.OnItemAdded(callback)
 			local rarity = child.Name
 			local path = child			
 			callback(name, rarity, path)
+		end
+	end)
+end
+
+function library.Machines.GetMachinesOnFloor()
+	local machines = {}
+	if not interacts then return machines end
+	local children = interacts:GetChildren()
+	for fart, child in ipairs(children) do
+		if child:IsA("Model") then
+			local machinetype = "Unknown Machine"
+			if child.Name == "Plushie" then
+				machinetype = "Default"
+			elseif child.Name == "Drone" then
+				machinetype = "Drone"
+			end
+			machines[child] = machinetype
+		end
+	end
+	return machines
+end
+
+function library.Machines.IsMachineCompleted(mach)
+	if not mach then return false end
+	local progress = mach:GetAttribute("Progress")
+	local maxprogress = mach:GetAttribute("MaxProgress")
+	return progress == maxprogress
+end
+
+function library.Machines.IsMachineIncomplete(mach)
+	return not library.Machines.IsMachineCompleted(mach)
+end
+
+function library.Machines.GetClosestMachine()
+	if not interacts or not player.Character then return nil end
+	local root = player.Character:FindFirstChild("HumanoidRootPart")
+	if not root then return nil end
+	local closestmachine = nil
+	local shortestdistance = math.huge
+	local children = interacts:GetChildren()
+	for fart, child in ipairs(children) do
+		if child:IsA("Model") then
+			local part = child:FindFirstChildWhichIsA("BasePart")
+			if part then
+				local distance = (root.Position - part.Position).Magnitude
+				if distance < shortestdistance then
+					shortestdistance = distance
+					closestmachine = child
+				end
+			end
+		end
+	end
+	return closestmachine
+end
+
+function library.Machines.ExtractMachine(mach)
+	if not mach then return end
+	if library.Machines.IsMachineCompleted(mach) then
+		warn("linear DF library | this machine is complete already.")
+		return nil
+	end
+	local interact = mach:FindFirstChild("Interact")
+	if interact then
+		local prompt = interact:FindFirstChildWhichIsA("ProximityPrompt")
+		if prompt then
+			if fireproximityprompt then
+				fireproximityprompt(prompt)
+			else
+				warn("linear DF library | fireproximityprompt is not supported..")
+			end
+		end
+	end
+end
+
+function library.Machines.OnMachineAdded(callback)
+	if not interacts then return end
+	return interacts.ChildAdded:Connect(function(child)
+		if child:IsA("Model") then
+			local machinetype = "Unknown Machine"
+			if child.Name == "Plushie" then
+				machinetype = "Default"
+			elseif child.Name == "Drone" then
+				machinetype = "Drone"
+			end
+			callback(child, machinetype)
 		end
 	end)
 end
