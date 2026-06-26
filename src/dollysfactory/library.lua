@@ -101,7 +101,7 @@ function library.Items.DropSlot(num)
 			res.dropTool.send({
 				slot = num
 			})
-		endd
+		end
 	end
 end
 
