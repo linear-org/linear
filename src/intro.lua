@@ -16,7 +16,7 @@ function intro:Start()
 		volume = 1
 	})
 
-	audio.Ended:Connect(function()
+	audio.Ended:Once(function()
 		audio:Destroy()
 	end)
 
