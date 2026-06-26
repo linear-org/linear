@@ -3,6 +3,7 @@ local library = {}
 library.Items = {}
 library.Machines = {}
 library.Environment = {}
+library.Player = {}
 
 local vfx = workspace:FindFirstChild("VFX")
 local interacts = workspace:FindFirstChild("Interacts")
@@ -268,6 +269,41 @@ function library.Environment.OnGameStateChanged(callback)
 	local laststate = library.Environment.GetGameState()	
 	local connection = RunService.Heartbeat:Connect(function()
 		local currentstate = library.Environment.GetGameState()
+		if currentstate ~= laststate then
+			laststate = currentstate
+			callback(currentstate)
+		end
+	end)
+	return connection
+end
+
+function Player.IsExtracting()
+	local assets = rst:FindFirstChild("ReplicatedAssets")
+	if not assets then return false end
+	local folder = assets:FindFirstChildWhichIsA("Folder")
+	if not folder then return false end
+	local turnmachine = folder:FindFirstChild("TurnMachine")
+	local pump = folder:FindFirstChild("Pump")
+	local character = player and player.Character
+	local humanoid = character and character:FindFirstChildWhichIsA("Humanoid")
+	local animator = humanoid and humanoid:FindFirstChildWhichIsA("Animator")
+	if animator then
+		for fart, track in ipairs(animator:GetPlayingAnimationTracks()) do
+			local anim = track.Animation
+			if anim then
+				if (turnmachine and anim.AnimationId == turnmachine.AnimationId) or (pump and anim.AnimationId == pump.AnimationId) then
+					return true
+				end
+			end
+		end
+	end
+	return false
+end
+
+function Player.OnExtractingChanged(callback)
+	local laststate = Player.IsExtracting()
+	local connection = game:GetService("RunService").Heartbeat:Connect(function()
+		local currentstate = Player.IsExtracting()
 		if currentstate ~= laststate then
 			laststate = currentstate
 			callback(currentstate)
