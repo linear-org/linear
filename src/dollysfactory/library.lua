@@ -5,7 +5,11 @@ library.Machines = {}
 local vfx = workspace:FindFirstChild("VFX")
 local interacts = workspace:FindFirstChild("Interacts")
 local players = game:GetService("Players")
+local rst = game:GetService("ReplicatedStorage")
 local player = players.LocalPlayer
+
+local toolcontroller = require(player.PlayerScripts.Client.ToolClient)
+local toolpackets = require(rst.Shared.ByteNetPackets.ToolPackets)
 
 function library.Items.GetItemsOnFloor()
 	if not vfx then return {} end
@@ -76,6 +80,37 @@ function library.Items.OnItemAdded(callback)
 			callback(Name, Path, Rarity)
 		end
 	end)
+end
+
+function library.Items.EquipSlot(num)
+	if not toolcontroller then return end
+	if toolcontroller.equippedSlot ~= num then
+		toolcontroller.ToggleEquipTool(num)
+	end
+end
+
+function library.Items.DropEquipped()
+	if not toolcontroller then return end
+	toolcontroller.DropEquippedTool()
+end
+
+function library.Items.DropSlot(num)
+	if toolpackets then
+		local success, res = pcall(require, toolpackets)
+		if success and res and res.dropTool then
+			res.dropTool.send({
+				slot = num
+			})
+		endd
+	end
+end
+
+function library.Items.UnequipEquipped()
+	if not toolcontroller then return end
+	local equipped = toolcontroller.equippedSlot
+	if equipped then
+		toolcontroller.ToggleEquipTool(equipped)
+	end
 end
 
 function library.Machines.GetMachinesOnFloor()
