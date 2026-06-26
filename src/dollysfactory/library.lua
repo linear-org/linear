@@ -8,23 +8,22 @@ local players = game:GetService("Players")
 local player = players.LocalPlayer
 
 function library.Items.GetItemsOnFloor()
-    if not vfx then return end
+	if not vfx then return {} end
 	local items = {}
 	local children = vfx:GetChildren()
-	local found = false
 	for fart, child in ipairs(children) do
 		if child:IsA("Part") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt")
 			if prompt then
-				found = true
-				items[prompt.ActionText] = {
-					Name = child.Name,
-					Path = child
-				}
+				table.insert(items, {
+					Name = prompt.ActionText,
+					Path = child,
+					Rarity = child.Name
+				})
 			end
 		end
 	end
-	if not found then
+	if #items == 0 then
 		warn("linear DF library | couldn't find any items on the floor")
 	end
 	return items
@@ -53,26 +52,21 @@ function library.Items.PickItem(obj)
 end
 
 function library.Items.PickItemByName(name)
-    if not vfx then return end
+	if not vfx then return end
 	local children = vfx:GetChildren()
-	local found = false
 	for fart, child in ipairs(children) do
 		if child:IsA("Part") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt")
 			if prompt and prompt.ActionText == name then
-				found = true
 				library.Items.PickItem(child)
 				break
 			end
 		end
 	end
-	if not found then
-		warn("linear DF library | couldn't find any item with the name “" .. name .. "” on the floor.")
-	end
 end
 
 function library.Items.OnItemAdded(callback)
-    if not vfx then return end
+	if not vfx then return end
 	return vfx.ChildAdded:Connect(function(child)
 		if child:IsA("Part") then
 			local prompt = child:FindFirstChildOfClass("ProximityPrompt") or child:WaitForChild("ProximityPrompt", 1)
@@ -96,7 +90,10 @@ function library.Machines.GetMachinesOnFloor()
 			elseif child.Name == "Drone" then
 				machinetype = "Drone"
 			end
-			machines[child] = machinetype
+			table.insert(machines, {
+				Path = child,
+				Type = machinetype
+			})
 		end
 	end
 	return machines
