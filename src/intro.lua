@@ -1,3 +1,4 @@
+--[[
 local Intro = {}
 
 function Intro:Start()
@@ -5,9 +6,10 @@ function Intro:Start()
 end
 
 return Intro
+]]
 
 
---[[ 
+
 local Intro = {}
 
 local fertilizer = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
@@ -160,4 +162,3 @@ function Intro:Start()
 end
 
 return Intro
-]]
