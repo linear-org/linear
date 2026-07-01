@@ -41,7 +41,7 @@ return {
     TakeAllItemsTitle = "Take All Items",
     TakeAllItemsDesc = "Takes all of the items in the map with the chosen rarity.",
     GriefOneItemTitle = "Grief One Item",
-    GriefOneItemDesc "Takes one of the items in the map with the chosen rarity and then teleports it to somewhere inaccessible.",
+    GriefOneItemDesc = "Takes one of the items in the map with the chosen rarity and then teleports it to somewhere inaccessible.",
     GriefAllItemsTitle = "Grief All Items",
     GriefAllItemsDesc = "Takes all of the items in the map with the chosen rarity and then teleports it to somewhere inaccessible.",
     
