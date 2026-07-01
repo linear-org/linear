@@ -1,15 +1,3 @@
---[[
-local Intro = {}
-
-function Intro:Start()
- warn('linear . intro has been disabled')
-end
-
-return Intro
-]]
-
-
-
 local Intro = {}
 
 local fertilizer = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
@@ -125,7 +113,7 @@ function Intro:Start()
     endvideo.Position = UDim2.new(0.5, 0, 0.5, 0)
     endvideo.AnchorPoint = Vector2.new(0.5, 0.5)
     endvideo.BackgroundTransparency = 1
-    endvideo.ZIndex = 10000
+    endvideo.ZIndex = 10003
     endvideo.Parent = bg
 
     Instance.new("UIAspectRatioConstraint", endvideo).AspectRatio = 1
@@ -154,9 +142,11 @@ function Intro:Start()
     if icon then icon:Destroy() end
     if endvideo then endvideo:Destroy() end
 
-    tweenservice:Create(bg, TweenInfo.new(0.3), {
+    local fadeOutTween = tweenservice:Create(bg, TweenInfo.new(0.3), {
         BackgroundTransparency = 1
-    }):Play():Wait()
+    })
+    fadeOutTween:Play()
+    fadeOutTween.Completed:Wait()
 
     gui:Destroy()
 end
