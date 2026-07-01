@@ -105,8 +105,8 @@ function Intro:Start()
     end
 
     waitfor(function()
-        return linear and linear.Loaded == true
-    end, 30)
+        return linear.Loaded == true
+    end, 9)
 
     local endvideo = Instance.new("VideoFrame")
     endvideo.Size = UDim2.new(0.15, 0, 0.15, 0)
