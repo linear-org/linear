@@ -10,6 +10,7 @@ local interacts = workspace:FindFirstChild("Interacts")
 local players = game:GetService("Players")
 local rst = game:GetService("ReplicatedStorage")
 local player = players.LocalPlayer
+local RunService = game:GetService("RunService")
 
 local toolcontroller = require(player.PlayerScripts.Client.ToolClient)
 local toolpackets = require(rst.Shared.ByteNetPackets.ToolPackets)
