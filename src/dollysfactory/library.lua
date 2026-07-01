@@ -202,7 +202,7 @@ function library.Machines.ExtractMachine(mach)
 		warn("linear DF library | this machine is complete already.")
 		return nil
 	end
-	local interact = mach:FindFirstChild("Interact")
+	local interact = mach:FindFirstChild("Interaction")
 	if interact then
 		local prompt = interact:FindFirstChildWhichIsA("ProximityPrompt")
 		if prompt then
