@@ -1,5 +1,15 @@
 local Intro = {}
 
+function Intro:Start()
+ warn('linear . intro has been disabled')
+end
+
+return Intro
+
+
+--[[ 
+local Intro = {}
+
 local fertilizer = loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
 local tweenservice = game:GetService("TweenService")
 
@@ -150,3 +160,4 @@ function Intro:Start()
 end
 
 return Intro
+]]
