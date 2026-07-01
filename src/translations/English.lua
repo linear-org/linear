@@ -5,7 +5,7 @@ return {
 	AutomationTabTitle = "Automation",
 	
 	-- Main
-	WelcomeTitle = "Great to see you",
+	WelcomeTitle = "Great to see you" ,
 	WelcomeDesc = "Hope your day’s going good!",
 	
 	AnonymousModeTitle = "Remain Anonymous",
@@ -41,7 +41,7 @@ return {
     TakeAllItemsTitle = "Take All Items",
     TakeAllItemsDesc = "Takes all of the items in the map with the chosen rarity.",
     GriefOneItemTitle = "Grief One Item",
-    GriefOneItemDesc = "Takes one of the items in the map with the chosen rarity and then teleports it to somewhere inaccessible.",
+    GriefOneItemDesc "Takes one of the items in the map with the chosen rarity and then teleports it to somewhere inaccessible.",
     GriefAllItemsTitle = "Grief All Items",
     GriefAllItemsDesc = "Takes all of the items in the map with the chosen rarity and then teleports it to somewhere inaccessible.",
     
@@ -50,6 +50,8 @@ return {
     
     OffsetThresholdTitle = "Offset Threshold",
     OffsetThresholdDesc = "The offset value for the rejects god mode, it is preferred to turn on Smart Offset under this slider instead of playing with this value.",
+    SmartOffsetTitle = "Offset Threshold",
+    SmartOffsetDesc = "Automatically configures the offset threshold when needed.",
     ImmunityRejectsTitle = "Rejects God Mode",
     ImmunityRejectsDesc = "Makes you immune to every reject and their attacks.",
     ImmunityMeistroTitle = "Meistro God Mode",
@@ -60,7 +62,7 @@ return {
     UtilityGroupboxTitle = "Utility",
     UtilityGroupboxDesc = "Features about game utilities.",
     DesyncTitle = "Desync",
-    DesyncDesc = "Makes so people still see you at your original position.",
+    DesyncDesc = "Makes you stay still in the server meanwhile you're moving on the client.",
     
     -- Automation
     CalibrationGroupboxTitle = "Calibration",
@@ -72,8 +74,4 @@ return {
     
     ToggleAutofarmTitle = "Toggle Autofarm",
     ToggleAutofarmDesc = "Automatically plays the game for you, expect this feature to have minor bugs.",
-    
-    -- TEMPORARY
-    WhereAreStuffTitle = "WHERE'S MOST OF THE SCRIPT!?",
-    WhereAreStuffDesc = "This version only supports Main, Player & Automation tabs, the others are still in progress, blame the owner for being a lazy fuck. This version is highly unstable, report the bugs you find in the tester bug reports, where else you'd get this script anyways.\n\n I may just quit."
 }
