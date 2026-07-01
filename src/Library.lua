@@ -31,8 +31,8 @@ function Linear:Error(...)
     error(self.Prefix .. " " .. table.concat({...}, " "), 2)
 end
 
-function Linear:Inform(...)
-    TestService:Message(self.Prefix .. " " .. table.concat({...}, " "))
+function Linear:Inform(...) -- deprecated function because delta doesn't support
+    print(self.Prefix, ...)
 end
 
 Linear.Utils = {}
