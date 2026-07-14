@@ -7,7 +7,7 @@ local function chat(from, what, fromcolor, whatcolor)
 end
 
 if game.PlaceId == 78515283254292 or game.PlaceId == 104522435597696 then -- Animal hospital; Lobby, Run
-    chat("linear", "I have reconized this game. I am now loading the script.", Color3.fromRGB(20, 20, 20), Color3.fromRGB(255, 255, 255))
+    chat("linear", "I have recognized this game. I am now loading the script.", Color3.fromRGB(20, 20, 20), Color3.fromRGB(255, 255, 255))
     loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/src/animalhospital/loader.lua"))()
 else
     chat("linear", "I couldn't recognize this game. I reject to load the script.", Color3.fromRGB(20, 20, 20), Color3.fromRGB(255, 255, 255))
