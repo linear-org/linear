@@ -51,6 +51,18 @@ Linear.ToTable = function(input)
     return {input}
 end
 
+Linear.WaitForAttribute = function(instance, attribute, timeout)
+    local start = os.clock()
+    timeout = timeout or 5
+    while not instance:GetAttribute(attribute) do
+        if os.clock() - start >= timeout then
+            return nil
+        end
+        task.wait()
+    end
+    return instance:GetAttribute(attribute)
+end
+
 Linear.Utils = {}
 Linear.Utils.Maid = Linear.Utils.Maid or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/maid.lua"))().new()
 Linear.Utils.Fertilizer = Linear.Utils.Fertilizer or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
