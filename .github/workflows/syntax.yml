@@ -1,0 +1,18 @@
+name: syntax checker
+on: [push, pull_request]
+jobs:
+  syntax-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: download darklua
+        run: |
+          curl -sL https://github.com/seaofvoices/darklua/releases/latest/download/darklua-linux-x86_64.zip -o darklua.zip
+          unzip darklua.zip
+          chmod +x darklua
+      - name: check syntax with darklua minifier
+        run: |
+          find . -type f \( -name "*.lua" -o -name "*.luau" \) -print0 | while IFS= read -r -d '' file; do
+            ./darklua process "$file" syntaxcheck.lua || exit 1
+          done
