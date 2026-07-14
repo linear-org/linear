@@ -4,7 +4,7 @@ local ESP = {}
 local Actives = {}
 
 local Settings = {
-	FrameSize = 0.8,
+	FrameSize = 1,
 	Highlights = true,
 	HighlightOutlineTransparency = 0.2,
 	HighlightFillTransparency = 0.6,
@@ -40,6 +40,7 @@ function ESP:Add(Data)
 	Billboard.Name = "linear's billboard"
 	Billboard.AlwaysOnTop = true
 	Billboard.Brightness = 1
+	Billboard.StudsOffset = -3
 	Billboard.LightInfluence = 0
 	Billboard.MaxDistance = math.huge
 	Billboard.ResetOnSpawn = true
