@@ -44,6 +44,13 @@ Linear.FireNowAndOnChildAdded = function(instance, callback)
     return instance.ChildAdded:Connect(callback)
 end
 
+Linear.ToTable = function(input)
+    if type(input) == "table" then
+        return input
+    end
+    return {input}
+end
+
 Linear.Utils = {}
 Linear.Utils.Maid = Linear.Utils.Maid or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/maid.lua"))().new()
 Linear.Utils.Fertilizer = Linear.Utils.Fertilizer or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
