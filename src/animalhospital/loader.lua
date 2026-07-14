@@ -17,4 +17,4 @@ for fart, path in ipairs(paths) do
 end
 
 local Linear = getgenv().Linear
-Linear:Inform("Loaded successfully.")
+Linear:Print("Loaded successfully.")
