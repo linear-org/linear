@@ -40,7 +40,7 @@ function ESP:Add(Data)
 	Billboard.Name = "linear's billboard"
 	Billboard.AlwaysOnTop = true
 	Billboard.Brightness = 1
-	Billboard.StudsOffset = -3
+	Billboard.StudsOffset = Vector3.new(0, -3, 0)
 	Billboard.LightInfluence = 0
 	Billboard.MaxDistance = math.huge
 	Billboard.ResetOnSpawn = true
