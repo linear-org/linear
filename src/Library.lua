@@ -52,15 +52,16 @@ Linear.ToTable = function(input)
 end
 
 Linear.WaitForAttribute = function(instance, attribute, timeout)
+    if not instance then return nil end
     local start = os.clock()
     timeout = timeout or 5
-    while not instance:GetAttribute(attribute) do
+    while instance and instance.Parent and not instance:GetAttribute(attribute) do
         if os.clock() - start >= timeout then
             return nil
         end
         task.wait()
     end
-    return instance:GetAttribute(attribute)
+    return instance and instance.Parent and instance:GetAttribute(attribute)
 end
 
 Linear.Utils = {}
