@@ -51,8 +51,8 @@ Linear.Utils.Translator = Linear.Utils.Translator or loadstring(game:HttpGet("ht
 Linear.Utils.Renderer = Linear.Utils.Renderer or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/rendering.lua"))()
 Linear.Utils.Scrambler = Linear.Utils.Scrambler or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/scrambler.lua"))()
 Linear.Utils.Intro = Linear.Utils.Intro or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/src/intro.lua"))()
-Linear.Utils.Esp = Linear.Utils.Intro or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/esp.lua"))()
-Linear.Utils.Visualizer = Linear.Utils.Intro or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/visualizer.lua"))()
+Linear.Utils.Esp = Linear.Utils.Esp or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/esp.lua"))()
+Linear.Utils.Visualizer = Linear.Utils.Visualizer or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/visualizer.lua"))()
 
 Linear.Originals = {}
 Linear.Values = {}
