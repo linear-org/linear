@@ -45,7 +45,7 @@ Linear.FireNowAndOnChildAdded = function(instance, callback)
 end
 
 Linear.Utils = {}
-Linear.Utils.Maid = Linear.Utils.Maid or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/maid.lua"))()
+Linear.Utils.Maid = Linear.Utils.Maid or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/maid.lua"))().new()
 Linear.Utils.Fertilizer = Linear.Utils.Fertilizer or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/fertilizer.lua"))()
 Linear.Utils.Translator = Linear.Utils.Translator or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/translator.lua"))()
 Linear.Utils.Renderer = Linear.Utils.Renderer or loadstring(game:HttpGet("https://raw.githubusercontent.com/linear-org/linear/refs/heads/main/utilities/rendering.lua"))()
